@@ -1,0 +1,17 @@
+# Load the MASS library for generating multivariate normal data
+library(MASS)
+
+# Set parameters
+n <- 1000            # Number of observations
+rho <- 0.7           # Correlation coefficient
+mu <- c(0, 0)        # Mean vector
+sigma <- matrix(c(1, rho, rho, 1), nrow = 2)  # Covariance matrix
+
+# Simulate the bivariate normal data
+set.seed(123)  # For reproducibility
+data <- mvrnorm(n, mu, sigma)
+X1 <- data[, 1]
+X2 <- data[, 2]
+
+# Display the first few rows of the dataset
+head(data)
