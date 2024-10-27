@@ -1,0 +1,5 @@
+Code to Compute the Mean of 𝑋2
+​# Assuming `data_df` contains the observed values of X2 as `X2_obs`
+mean_X2 <- mean(data_df$X2_obs, na.rm = TRUE)
+cat("Mean of observed X2 values:", mean_X2, "\n")
+
