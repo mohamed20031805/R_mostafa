@@ -1,0 +1,41 @@
+# Load necessary libraries
+library(MASS)
+
+# Set parameters
+n <- 1000            # Number of observations
+rho <- 0.7           # Correlation coefficient
+mu <- c(0, 0)        # Mean vector
+sigma <- matrix(c(1, rho, rho, 1), nrow = 2)  # Covariance matrix
+
+# Simulate the bivariate normal data
+set.seed(123)  # For reproducibility
+data <- mvrnorm(n, mu, sigma)
+X1 <- data[, 1]
+X2 <- data[, 2]
+
+# Create a dataframe with X1 and X2
+data_df <- data.frame(X1 = X1, X2_obs = X2)
+
+# Introduce some missing values randomly in X2_obs for demonstration
+set.seed(456)  # Different seed for randomness
+missing_indices <- sample(1:n, size = 100)  # Randomly select 100 indices to be NA
+data_df$X2_obs[missing_indices] <- NA
+
+# Display the first few rows of the dataset with missing values
+head(data_df)
+
+# Build a linear regression model to predict X2_obs based on X1
+# Only use complete cases to fit the model
+lm_model <- lm(X2_obs ~ X1, data = data_df, na.action = na.exclude)
+
+# Predict missing values using the regression model
+data_df$X2_imputed_regression <- ifelse(is.na(data_df$X2_obs), 
+                                         predict(lm_model, newdata = data_df), 
+                                         data_df$X2_obs)
+
+# Calculate the mean of the completed data (imputed values)
+mean_completed_X2_regression <- mean(data_df$X2_imputed_regression, na.rm = TRUE)
+cat("Mean of the completed data (after regression imputation):", mean_completed_X2_regression, "\n")
+
+# Display the first few rows of the dataset with regression imputed values
+head(data_df)
