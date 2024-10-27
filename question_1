@@ -1,3 +1,5 @@
+Question 1: Simulate the Dataset
+First, let's create a dataset with 𝑋1 and 𝑋2following a bivariate normal distribution with zero mean, variance 1, and correlation 𝜌.
 # Load the MASS library for generating multivariate normal data
 library(MASS)
 
