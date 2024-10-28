@@ -14,3 +14,5 @@ colnames(X) <- c("X1", "X2")
 # Génération des valeurs manquantes dans X2 selon la probabilité de missingness
 R <- rbinom(n, 1, prob = 1 / (1 + exp(-1 - X[, 1])))
 X[R == 0, 2] <- NA
+
+mean_X2 <- mean(X[, 2], na.rm = TRUE)
