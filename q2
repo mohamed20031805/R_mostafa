@@ -1,0 +1,6 @@
+install.packages(c("missMDA", "missForest", "mice", "DescTools", "VIM"))
+library(missMDA)
+library(missForest)
+library(mice)
+library(DescTools)
+library(VIM)
