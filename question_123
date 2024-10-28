@@ -22,3 +22,10 @@ mean_X2_obs <- mean(X[!is.na(X[, 2]), 2])
 X_imputed_mean <- X
 X_imputed_mean[is.na(X[, 2]), 2] <- mean_X2_obs
 mean_imputed_mean <- mean(X_imputed_mean[, 2])
+
+# Régression linéaire de X2 en fonction de X1 pour les valeurs observées
+lm_model <- lm(X[, 2] ~ X[, 1], na.action = na.exclude)
+
+X_imputed_conditional <- X
+X_imputed_conditional[is.na(X[, 2]), 2] <- predict(lm_model, newdata = X[is.na(X[, 2]), ])
+mean_imputed_conditional <- mean(X_imputed_conditional[, 2])
