@@ -1,0 +1,8 @@
+boxplot(diabetes[, i] ~ diabetes[, 9], main = paste("Relationship with Diabetes -",
+colnames(diabetes)[i]), xlab = "Diabetes", ylab = colnames(diabetes)[i])
+
+for (i in 1:8) {
+  boxplot(diabetes[, i] ~ diabetes[, 9], main = paste("Lien Diabète -",
+colnames(diabetes)[i]), xlab = "Diabète", ylab = colnames(diabetes)[i])
+}
+
