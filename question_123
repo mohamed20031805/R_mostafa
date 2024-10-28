@@ -1,0 +1,16 @@
+# Paramètres
+set.seed(123)
+n <- 100  # Nombre d'observations
+rho <- 0.5  # Corrélation entre X1 et X2
+
+# Matrice de covariance
+Sigma <- matrix(c(1, rho, rho, 1), 2, 2)
+
+# Génération des données de X (distribution normale bivariée)
+library(MASS)
+X <- mvrnorm(n, mu = c(0, 0), Sigma = Sigma)
+colnames(X) <- c("X1", "X2")
+
+# Génération des valeurs manquantes dans X2 selon la probabilité de missingness
+R <- rbinom(n, 1, prob = 1 / (1 + exp(-1 - X[, 1])))
+X[R == 0, 2] <- NA
