@@ -4,3 +4,8 @@ library(missForest)
 library(mice)
 library(DescTools)
 library(VIM)
+
+
+# Matrice de corrélation
+matcor <- cor(diabetes[, 1:8], use = "complete.obs")
+matcor_pairwise <- cor(diabetes[, 1:8], use = "pairwise.complete.obs")
