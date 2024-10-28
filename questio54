@@ -1,0 +1,14 @@
+# Convertir X en data frame et ajouter des noms de colonnes
+X <- as.data.frame(X)
+colnames(X) <- c("X1", "X2")  # Assigner des noms de colonnes explicites
+
+# Régression linéaire de X2 en fonction de X1 pour les valeurs observées
+lm_model <- lm(X2 ~ X1, data = X, na.action = na.exclude)
+
+# Imputation conditionnelle pour les valeurs manquantes dans X2
+X_imputed_conditional <- X
+X_imputed_conditional$X2[is.na(X$X2)] <- predict(lm_model, newdata = X[is.na(X$X2), , drop = FALSE])
+
+# Calcul de la moyenne après imputation
+mean_imputed_conditional <- mean(X_imputed_conditional$X2)
+mean_imputed_conditional
