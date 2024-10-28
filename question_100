@@ -1,0 +1,7 @@
+X_imputed_stochastic <- X
+for (i in which(is.na(X[, 2]))) {
+  mu_cond <- predict(lm_model, newdata = data.frame(X1 = X[i, 1]))
+  sd_cond <- sqrt(1 - rho^2)  # Écart-type conditionnel
+  X_imputed_stochastic[i, 2] <- rnorm(1, mean = mu_cond, sd = sd_cond)
+}
+mean_imputed_stochastic <- mean(X_imputed_stochastic[, 2])
