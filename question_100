@@ -5,3 +5,30 @@ for (i in which(is.na(X[, 2]))) {
   X_imputed_stochastic[i, 2] <- rnorm(1, mean = mu_cond, sd = sd_cond)
 }
 mean_imputed_stochastic <- mean(X_imputed_stochastic[, 2])
+
+
+# Création des colonnes d'imputation
+X_mean_imputed <- X  # Imputation par la moyenne
+X_mean_imputed$X2[is.na(X$X2)] <- mean(X$X2, na.rm = TRUE)
+
+X_conditional_imputed <- X_imputed_conditional  # Imputation conditionnelle
+
+# Imputation stochastique
+X_stochastic_imputed <- X
+for (i in which(is.na(X$X2))) {
+  mu_cond <- predict(lm_model, newdata = data.frame(X1 = X$X1[i]))
+  sd_cond <- sqrt(1 - rho^2)
+  X_stochastic_imputed$X2[i] <- rnorm(1, mean = mu_cond, sd = sd_cond)
+}
+
+# Créer un data frame avec les quatre colonnes pour X2
+result <- data.frame(
+  X1 = X$X1,                          # Colonne X1 d'origine
+  X2_original = X$X2,                 # Colonne X2 avec valeurs manquantes
+  X2_mean_imputed = X_mean_imputed$X2,  # Imputation par la moyenne
+  X2_conditional_imputed = X_conditional_imputed$X2,  # Imputation conditionnelle
+  X2_stochastic_imputed = X_stochastic_imputed$X2     # Imputation stochastique
+)
+
+# Affichage des premières lignes
+head(result)
