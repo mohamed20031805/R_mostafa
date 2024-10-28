@@ -16,3 +16,5 @@ R <- rbinom(n, 1, prob = 1 / (1 + exp(-1 - X[, 1])))
 X[R == 0, 2] <- NA
 
 mean_X2 <- mean(X[, 2], na.rm = TRUE)
+
+mean_X2_obs <- mean(X[!is.na(X[, 2]), 2])
