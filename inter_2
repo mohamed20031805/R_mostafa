@@ -1,0 +1,7 @@
+Correlation Matrix Analysis:
+“To assess relationships between variables despite missing data, 
+I compared correlation matrices using two methods: the standard complete case approach (cor(diabetes[,1:8])) and the pairwise method (cor(diabetes[,1:8], use="pairwise.complete.obs")). 
+The differences between these matrices, especially for 'Skin.Thick' and 'Insulin,' showed me how missing data handling can influence correlation strength. 
+The pairwise method generally led to lower correlations due to the reduced sample size for each pair,
+highlighting how missingness can impact data interpretations and possibly affect insights on variable associations.”
+
