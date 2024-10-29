@@ -1,0 +1,7 @@
+Proportion of Missing Data:
+“By analyzing the missing data proportions with the aggr() function in VIM, I observed that certain variables, 
+particularly 'Skin.Thick' and 'Insulin,' have substantial missing values, with 'Insulin' missing over 40% of its entries. 
+This high rate of missingness could affect the dataset's representativeness if not managed carefully. 
+I identified these variables as priority candidates for imputation to maintain the dataset's structure and avoid biases in any downstream analysis. 
+Meanwhile, variables like 'Pregnancies,
+' 'DPF,' 'Age,' and 'Outcome' contain no missing data, which could help anchor the imputation process for other variables.”
