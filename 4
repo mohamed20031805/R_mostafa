@@ -6,3 +6,7 @@ for (i in 1:8) {
 colnames(diabetes)[i]), xlab = "Diabète", ylab = colnames(diabetes)[i])
 }
 
+
+
+res.mice <- mice(diabetes, maxit = 50, printFlag = FALSE)
+densityplot(res.mice)
